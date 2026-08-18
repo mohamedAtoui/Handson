@@ -5,7 +5,7 @@ const DISTRIBUTORS = [
   "Pharmainvest",
   "UPROmedic",
   "Somepharm",
-  "Setid Medic 2",
+  "Setif Medic 2",
   "Setifismed",
   "Timelouka",
   "Setif Medic",
