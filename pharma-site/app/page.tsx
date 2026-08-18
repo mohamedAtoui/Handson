@@ -33,18 +33,18 @@ export default function Home() {
                 </h1>
 
                 <div className="rise-in delay-2 mt-9 flex flex-wrap items-center gap-3">
-                  <Link href="#products" className="btn btn-primary">
+                  <Link href="#products" className="btn btn-primary w-full sm:w-auto">
                     <T fr="Voir les produits" en="View Products" />
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link href="#contact" className="btn btn-secondary">
+                  <Link href="#contact" className="btn btn-secondary w-full sm:w-auto">
                     <T fr="Nous contacter" en="Contact Us" />
                   </Link>
                 </div>
               </div>
 
               <div className="lg:col-span-6">
-                <div className="product-stage panel-tint min-h-[22rem] px-6 py-12 sm:px-10 sm:py-16 lg:min-h-[26rem]">
+                <div className="product-stage panel-tint min-h-[18rem] px-5 py-10 sm:min-h-[22rem] sm:px-10 sm:py-16 lg:min-h-[26rem]">
                   <Image
                     src="/synapgen-landing.png"
                     alt="Synapgen - Memory and Mental Vitality Supplement"
@@ -80,9 +80,9 @@ export default function Home() {
               </p>
             </div>
 
-            <article className="card card-lift mt-10 overflow-hidden bg-white">
+            <article className="card card-bleed card-lift mt-8 overflow-hidden bg-white sm:mt-10">
               <div className="grid lg:grid-cols-2">
-                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-6 py-10 lg:border-r lg:border-b-0 lg:px-10 lg:py-14">
+                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-5 py-9 sm:px-6 sm:py-10 lg:border-r lg:border-b-0 lg:px-10 lg:py-14">
                   <Image
                     src="/synapgen-3d.png"
                     alt="Synapgen - Memory and Mental Vitality Supplement"
@@ -92,7 +92,7 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="flex flex-col justify-center p-7 sm:p-10">
+                <div className="flex flex-col justify-center p-5 sm:p-7 lg:p-10">
                   <span className="chip chip-brand self-start">
                     <T fr="Complément Alimentaire" en="Dietary Supplement" />
                   </span>
@@ -152,42 +152,37 @@ export default function Home() {
                 </h3>
 
                 <dl className="mt-6 space-y-6">
-                  <div className="flex items-start gap-4">
-                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand)]" />
-                    <div>
-                      <dt className="eyebrow eyebrow-muted">Email</dt>
-                      <dd className="mt-1">
-                        <a
-                          href="mailto:contact@handson.com"
-                          className="text-[1.0625rem] font-medium break-all hover:text-[var(--brand)]"
-                        >
-                          contact@handson.com
-                        </a>
-                      </dd>
-                    </div>
+                  <div>
+                    <dt className="eyebrow eyebrow-muted flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-[var(--brand)]" />
+                      Email
+                    </dt>
+                    <dd className="mt-1.5">
+                      <a
+                        href="mailto:contact@handson.com"
+                        className="inline-block py-1 text-[1.0625rem] font-medium break-all hover:text-[var(--brand)]"
+                      >
+                        contact@handson.com
+                      </a>
+                    </dd>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand)]" />
-                    <div>
-                      <dt className="eyebrow eyebrow-muted">
-                        <T fr="Téléphone" en="Phone" />
-                      </dt>
-                      <dd className="mt-1">
-                        <a
-                          href="tel:+213664117011"
-                          className="tnum text-[1.0625rem] font-medium hover:text-[var(--brand)]"
-                        >
-                          +213 (0) 664117011
-                        </a>
-                        <p className="mt-1 text-[0.875rem] text-[var(--ink-faint)]">
-                          <T
-                            fr="Dim–Jeu : 9h – 18h"
-                            en="Sun–Thu: 9:00 AM – 6:00 PM"
-                          />
-                        </p>
-                      </dd>
-                    </div>
+                  <div>
+                    <dt className="eyebrow eyebrow-muted flex items-center gap-2">
+                      <Phone className="h-4 w-4 text-[var(--brand)]" />
+                      <T fr="Téléphone" en="Phone" />
+                    </dt>
+                    <dd className="mt-1.5">
+                      <a
+                        href="tel:+213664117011"
+                        className="tnum inline-block py-1 text-[1.0625rem] font-medium hover:text-[var(--brand)]"
+                      >
+                        +213 (0) 664117011
+                      </a>
+                      <p className="mt-1 text-[0.875rem] text-[var(--ink-faint)]">
+                        <T fr="Dim–Jeu : 9h – 18h" en="Sun–Thu: 9:00 AM – 6:00 PM" />
+                      </p>
+                    </dd>
                   </div>
                 </dl>
               </div>
