@@ -404,29 +404,82 @@ html {
   will-change: transform;
 }
 
-/* Synapgen banner — slide in from the right, pause before the text,
-   then bounce back. Composed on a separate wrapper so the dance
-   wobble (rotation) on the inner chip keeps running alongside it. */
-@keyframes synapgen-slide {
-  0%   { transform: translateX(60px); }
-  28%  { transform: translateX(0); }
-  48%  { transform: translateX(0); }
-  58%  { transform: translateX(26px); }
-  68%  { transform: translateX(6px); }
-  78%  { transform: translateX(18px); }
-  88%  { transform: translateX(8px); }
-  100% { transform: translateX(60px); }
+/* Announcement banner — distributor marquee.
+   Two identical groups sit side by side inside the track; shifting the
+   track by exactly half its width loops seamlessly. The duration is
+   tuned for a calm, readable ~50px/s scroll. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 20px,
+    #000 calc(100% - 20px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 20px,
+    #000 calc(100% - 20px),
+    transparent 100%
+  );
 }
 
-.synapgen-slide {
-  display: inline-flex;
-  animation: synapgen-slide 6s ease-in-out infinite;
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 21s linear infinite;
   will-change: transform;
 }
 
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 0.7rem;
+  white-space: nowrap;
+  color: #fef9c3;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.65);
+  flex: none;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Motion-sensitive visitors get a static, horizontally scrollable list
+   instead of an animated one. */
 @media (prefers-reduced-motion: reduce) {
-  .synapgen-dance,
-  .synapgen-slide { animation: none; }
+  .synapgen-dance { animation: none; }
+
+  .marquee { overflow-x: auto; }
+  .marquee-track { animation: none; }
+  .marquee-group[aria-hidden="true"] { display: none; }
 }
 
 /* ────────────────────────────────────────────
