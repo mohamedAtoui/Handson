@@ -1,37 +1,55 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+/* Display serif — headlines only. Reads as a laboratory monograph
+   rather than another geometric-sans landing page. */
+const newsreader = Newsreader({
+  variable: "--font-display",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+/* Text face — clinical, highly legible at small sizes. */
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-sans",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/* Same family, Arabic script — the distribution notice is trilingual. */
+const plexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sarlhandson.com"),
   title: {
-    default: "HandSon - Innovative Pharmaceutical Solutions",
+    default: "HandSon — Laboratoire pharmaceutique algérien",
     template: "%s | HandSon",
   },
   description:
-    "HandSon - Innovative pharmaceutical solutions including dietary supplements for memory, cognitive function and mental vitality.",
+    "HandSon, laboratoire pharmaceutique algérien. Compléments alimentaires pour la mémoire, la concentration et les fonctions cognitives, distribués par les grossistes répartiteurs en Algérie.",
   keywords: [
     "HandSon",
-    "pharmaceutical",
-    "supplements",
+    "SARL HandSon",
+    "laboratoire pharmaceutique Algérie",
+    "complément alimentaire",
     "Synapgen",
-    "Magnesium",
-    "memory",
-    "cognitive function",
+    "Magnésium L-thréonate",
+    "mémoire",
+    "concentration",
+    "fonctions cognitives",
   ],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "fr_DZ",
     url: "https://www.sarlhandson.com",
     siteName: "HandSon",
   },
@@ -53,7 +71,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${newsreader.variable} ${plexSans.variable} ${plexArabic.variable} antialiased`}
       >
         {children}
       </body>

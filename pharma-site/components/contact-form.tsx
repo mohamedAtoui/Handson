@@ -2,154 +2,196 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Send, CheckCircle } from "lucide-react"
+import { AlertCircle, Check, Send } from "lucide-react"
+import { T, useLang } from "@/components/i18n"
+
+const COPY = {
+  fr: {
+    name: "Nom et prénom",
+    namePlaceholder: "Votre nom",
+    email: "Email",
+    emailPlaceholder: "vous@exemple.com",
+    org: "Objet",
+    orgPlaceholder: "Référencement, approvisionnement…",
+    message: "Message",
+    messagePlaceholder: "Décrivez votre demande",
+  },
+  en: {
+    name: "Full name",
+    namePlaceholder: "Your name",
+    email: "Email",
+    emailPlaceholder: "you@example.com",
+    org: "Subject",
+    orgPlaceholder: "Listing, supply…",
+    message: "Message",
+    messagePlaceholder: "Describe your request",
+  },
+} as const
 
 export default function ContactForm() {
+  const lang = useLang()
+  const t = COPY[lang]
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   })
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  )
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    setStatus("sending")
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
+      if (!response.ok) throw new Error("Request failed")
 
-      if (!response.ok) {
-        throw new Error('Failed to send message')
-      }
-
-      setSubmitSuccess(true)
+      setStatus("sent")
       setFormData({ name: "", email: "", subject: "", message: "" })
-    } catch (error) {
-      console.error('Error sending message:', error)
-    } finally {
-      setIsSubmitting(false)
-      setTimeout(() => setSubmitSuccess(false), 5000)
+    } catch {
+      setStatus("error")
     }
   }
 
-  const inputClasses = "h-12 border-gray-200 bg-white rounded-lg transition-all duration-200 focus:border-[var(--handson-green)] focus:ring-[var(--handson-green)] focus:ring-1 placeholder:text-gray-300"
-
   return (
-    <div className="bg-white p-8 rounded-2xl border border-gray-100" style={{ boxShadow: 'var(--shadow-card)' }}>
-      <h3 className="text-xl font-bold text-gray-900 mb-6" style={{ letterSpacing: '-0.01em' }}>
-        Send us a message
+    <div className="card bg-white p-6 sm:p-8">
+      <h3 className="font-sans text-[1.0625rem] font-semibold">
+        <T fr="Écrire à l’équipe" en="Write to the team" />
       </h3>
+      <p className="mt-1.5 text-[0.875rem] text-[var(--ink-faint)]">
+        <T
+          fr="Nous répondons sous un jour ouvré."
+          en="We reply within one business day."
+        />
+      </p>
 
-      {submitSuccess ? (
-        <div
-          className="p-6 rounded-xl mb-6 text-center border"
+      {status === "sent" ? (
+        <p
+          role="status"
+          className="mt-6 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-[0.9375rem]"
           style={{
-            background: 'var(--handson-green-tint)',
-            borderColor: 'rgba(26, 159, 74, 0.2)',
+            background: "var(--brand-tint)",
+            borderColor: "rgba(16,122,68,0.24)",
+            color: "var(--brand-strong)",
           }}
         >
-          <CheckCircle className="h-8 w-8 mx-auto mb-2" style={{ color: 'var(--handson-green)' }} />
-          <p className="font-semibold text-gray-900">Message sent successfully!</p>
-          <p className="text-sm mt-1 text-gray-500">We will respond as soon as possible.</p>
-        </div>
+          <Check className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>
+            <T
+              fr="Message envoyé. Nous revenons vers vous rapidement."
+              en="Message sent. We will get back to you shortly."
+            />
+          </span>
+        </p>
       ) : null}
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-gray-600 font-medium text-sm">
-              Full Name
-            </Label>
-            <Input
+      {status === "error" ? (
+        <p
+          role="alert"
+          className="mt-6 flex items-start gap-2.5 rounded-lg border border-[#f0c9c5] bg-[#fdf3f2] px-4 py-3 text-[0.9375rem] text-[#8f2b21]"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>
+            <T
+              fr="L’envoi a échoué. Écrivez-nous à sarl.handson@gmail.com ou réessayez."
+              en="Sending failed. Email sarl.handson@gmail.com or try again."
+            />
+          </span>
+        </p>
+      ) : null}
+
+      <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="name" className="field-label">
+              {t.name}
+            </label>
+            <input
               id="name"
               name="name"
+              className="field"
               value={formData.name}
               onChange={handleChange}
+              placeholder={t.namePlaceholder}
+              autoComplete="name"
               required
-              className={inputClasses}
-              placeholder="Your name"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-gray-600 font-medium text-sm">
-              Email
-            </Label>
-            <Input
+          <div>
+            <label htmlFor="email" className="field-label">
+              {t.email}
+            </label>
+            <input
               id="email"
               name="email"
               type="email"
+              className="field"
               value={formData.email}
               onChange={handleChange}
+              placeholder={t.emailPlaceholder}
+              autoComplete="email"
               required
-              className={inputClasses}
-              placeholder="your@email.com"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="subject" className="text-gray-600 font-medium text-sm">
-            Subject
-          </Label>
-          <Input
+        <div>
+          <label htmlFor="subject" className="field-label">
+            {t.org}
+          </label>
+          <input
             id="subject"
             name="subject"
+            className="field"
             value={formData.subject}
             onChange={handleChange}
+            placeholder={t.orgPlaceholder}
             required
-            className={inputClasses}
-            placeholder="Subject of your message"
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="message" className="text-gray-600 font-medium text-sm">
-            Message
-          </Label>
-          <Textarea
+        <div>
+          <label htmlFor="message" className="field-label">
+            {t.message}
+          </label>
+          <textarea
             id="message"
             name="message"
             rows={5}
+            className="field"
             value={formData.message}
             onChange={handleChange}
+            placeholder={t.messagePlaceholder}
             required
-            className="border-gray-200 bg-white rounded-lg transition-all duration-200 focus:border-[var(--handson-green)] focus:ring-[var(--handson-green)] focus:ring-1 resize-none placeholder:text-gray-300"
-            placeholder="Describe your request in detail..."
           />
         </div>
 
         <button
           type="submit"
-          className="btn-handson w-full h-12"
-          disabled={isSubmitting}
+          className="btn btn-primary w-full"
+          disabled={status === "sending"}
         >
-          {isSubmitting ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              Sending...
-            </>
+          {status === "sending" ? (
+            <T fr="Envoi…" en="Sending…" />
           ) : (
             <>
               <Send className="h-4 w-4" />
-              Send Message
+              <T fr="Envoyer le message" en="Send message" />
             </>
           )}
         </button>

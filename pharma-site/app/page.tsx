@@ -1,220 +1,382 @@
-import { Phone, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle, ArrowRight } from "lucide-react"
+import {
+  ArrowRight,
+  Check,
+  FlaskConical,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Store,
+} from "lucide-react"
 import ContactForm from "@/components/contact-form"
-import HandSonLogo from "@/components/handson-logo"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
 import AnnouncementBanner from "@/components/announcement-banner"
-import { T, LanguageToggle } from "@/components/i18n"
+import { DISTRIBUTORS } from "@/components/distributors"
+import { T } from "@/components/i18n"
+
+/* Four facts that answer the questions a pharmacist asks first. */
+const FACTS = [
+  {
+    label: { fr: "Actif principal", en: "Key active" },
+    value: { fr: "Magnésium L-thréonate", en: "Magnesium L-threonate" },
+  },
+  {
+    label: { fr: "Conditionnement", en: "Pack" },
+    value: { fr: "60 gélules · 3 par jour", en: "60 capsules · 3 a day" },
+  },
+  {
+    label: { fr: "Distribution", en: "Distribution" },
+    value: { fr: "9 grossistes en Algérie", en: "9 wholesalers in Algeria" },
+  },
+  {
+    label: { fr: "Référencement", en: "Listing" },
+    value: { fr: "Accompagnement des officines", en: "Support for pharmacies" },
+  },
+]
+
+const COMMITMENTS = [
+  {
+    icon: FlaskConical,
+    title: { fr: "Formulation documentée", en: "Documented formulation" },
+    body: {
+      fr: "Nos formules reposent sur des actifs dont l’intérêt cognitif est décrit dans la littérature scientifique, à des dosages tenus constants d’un lot à l’autre.",
+      en: "Our formulas use actives whose cognitive relevance is described in the scientific literature, at dosages held constant from batch to batch.",
+    },
+  },
+  {
+    icon: ShieldCheck,
+    title: { fr: "Exigence pharmaceutique", en: "Pharmaceutical standards" },
+    body: {
+      fr: "Fabrication, étiquetage trilingue et traçabilité sont pensés pour le circuit officinal et pour le pharmacien qui délivre le produit au comptoir.",
+      en: "Manufacturing, trilingual labelling and traceability are built for the pharmacy channel and for the pharmacist handing the product over the counter.",
+    },
+  },
+  {
+    icon: Store,
+    title: { fr: "Proximité avec l’officine", en: "Close to the pharmacy" },
+    body: {
+      fr: "Référencement, réapprovisionnement, informations produit : notre équipe répond directement aux grossistes et aux pharmaciens qui nous sollicitent.",
+      en: "Listing, restocking, product information: our team answers wholesalers and pharmacists directly.",
+    },
+  },
+]
+
+const BENEFITS = [
+  { fr: "Soutien de la fonction mémorielle", en: "Supports memory function" },
+  { fr: "Meilleure concentration au quotidien", en: "Better day-to-day concentration" },
+  { fr: "Formule au Magnésium L-thréonate", en: "Magnesium L-threonate formula" },
+  { fr: "Étiquetage français, anglais et arabe", en: "French, English and Arabic labelling" },
+]
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100/80" style={{ boxShadow: 'var(--shadow-soft)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <HandSonLogo size="sm" />
-            <div className="flex items-center gap-4 sm:gap-6">
-              <nav className="hidden sm:flex items-center gap-8">
-                <Link href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  <T fr="Produits" en="Products" />
-                </Link>
-                <Link href="#contact" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  Contact
-                </Link>
-              </nav>
-              <LanguageToggle />
-            </div>
-          </div>
-        </div>
-      </header>
-
+      <SiteHeader />
       <AnnouncementBanner />
 
-      {/* Hero Section */}
-      <section className="relative py-24 lg:py-36 min-h-[65vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 bg-dots opacity-40"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-10 flex justify-center animate-fade-in-up">
-              <HandSonLogo size="lg" />
-            </div>
+      <main>
+        {/* ───────────────────────── Hero ───────────────────────── */}
+        <section className="section pb-12 lg:pb-16">
+          <div className="shell">
+            <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-6">
+                <p className="eyebrow rise-in">
+                  <T
+                    fr="Laboratoire pharmaceutique · Algérie"
+                    en="Pharmaceutical laboratory · Algeria"
+                  />
+                </p>
+                <h1 className="display-xl rise-in delay-1 mt-5">
+                  <T
+                    fr="Soutenir la mémoire avec une exigence pharmaceutique."
+                    en="Supporting memory with pharmaceutical rigour."
+                  />
+                </h1>
+                <p className="lede rise-in delay-2 mt-6 max-w-xl">
+                  <T
+                    fr="HandSon formule des compléments alimentaires à visée cognitive et les distribue à travers le réseau des grossistes répartiteurs algériens."
+                    en="HandSon formulates supplements for cognitive health and distributes them through Algeria’s network of pharmaceutical wholesalers."
+                  />
+                </p>
 
-            <p className="text-lg sm:text-xl text-gray-500 mb-8 max-w-2xl mx-auto animate-fade-in-up animation-delay-200" style={{ letterSpacing: '0.01em' }}>
-              <T
-                fr="Des solutions pharmaceutiques innovantes pour votre santé et votre bien-être"
-                en="Innovative pharmaceutical solutions for your health and well-being"
-              />
-            </p>
+                <div className="rise-in delay-3 mt-9 flex flex-wrap items-center gap-3">
+                  <Link href="/products/synapgen" className="btn btn-primary">
+                    <T fr="Découvrir Synapgen" en="Discover Synapgen" />
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link href="#contact" className="btn btn-secondary">
+                    <T fr="Contacter l’équipe" en="Contact the team" />
+                  </Link>
+                </div>
+              </div>
 
-            <div className="mt-10 flex justify-center gap-4 animate-fade-in-up animation-delay-400">
-              <Link href="#products" className="btn-handson">
-                <T fr="Voir les produits" en="View Products" />
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-gray-700 bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300" style={{ fontSize: '0.9375rem' }}>
-                <T fr="Nous contacter" en="Contact Us" />
-              </Link>
+              <div className="lg:col-span-6">
+                <div className="product-stage panel-tint min-h-[22rem] px-6 py-12 sm:px-10 sm:py-16 lg:min-h-[26rem]">
+                  <Image
+                    src="/synapgen-landing.png"
+                    alt="Synapgen — boîtes de 60 gélules, étiquetage français et arabe"
+                    width={1528}
+                    height={698}
+                    priority
+                    className="h-auto w-full object-contain drop-shadow-[0_22px_44px_rgba(12,27,20,0.18)]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Products Section */}
-      <section id="products" className="py-24" style={{ background: 'var(--handson-slate-50)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="badge-green mb-6">
-              <T fr="Nos produits" en="Our Products" />
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4" style={{ letterSpacing: '-0.02em' }}>
-              <T fr="Découvrez nos solutions" en="Discover Our Solutions" />
-            </h2>
-            <div className="section-divider mx-auto mb-6"></div>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-              <T
-                fr="Des produits pharmaceutiques de qualité conçus pour soutenir votre santé et votre bien-être cognitif."
-                en="Quality pharmaceutical products designed to support your health and cognitive well-being."
-              />
-            </p>
+        {/* ───────────────────── Facts strip ────────────────────── */}
+        <section
+          aria-label="Repères produit"
+          className="border-y border-[var(--line)] bg-white"
+        >
+          <div className="shell">
+            <dl className="grid grid-cols-1 gap-x-10 gap-y-7 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:py-9">
+              {FACTS.map((fact) => (
+                <div key={fact.label.en}>
+                  <dt className="eyebrow eyebrow-muted">
+                    <T fr={fact.label.fr} en={fact.label.en} />
+                  </dt>
+                  <dd className="tnum mt-2 text-[0.9375rem] font-medium text-[var(--ink)]">
+                    <T fr={fact.value.fr} en={fact.value.en} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
+        </section>
 
-          {/* Product Card — editorial side-by-side layout */}
-          <div className="max-w-5xl mx-auto">
-            <Link href="/products/synapgen" className="block group">
-              <div className="product-card bg-white rounded-2xl overflow-hidden transition-all duration-500">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  {/* Product Image */}
-                  <div className="relative h-72 lg:h-auto lg:min-h-[320px] overflow-hidden" style={{ background: 'linear-gradient(145deg, #1a1a2e 0%, #16213e 100%)' }}>
-                    <Image
-                      src="/synapgen-landing.png"
-                      alt="Synapgen - Memory and Mental Vitality Supplement"
-                      fill
-                      className="object-contain object-center p-4 group-hover:scale-105 transition-transform duration-500"
+        {/* ─────────────────────── Produits ─────────────────────── */}
+        <section id="produits" className="section section-alt scroll-mt-24 lg:scroll-mt-32">
+          <div className="shell">
+            <div className="max-w-2xl">
+              <p className="eyebrow">
+                <T fr="Notre gamme" en="Our range" />
+              </p>
+              <h2 className="display-lg mt-4">
+                <T
+                  fr="Un produit, travaillé en profondeur."
+                  en="One product, worked through in depth."
+                />
+              </h2>
+              <p className="lede mt-4">
+                <T
+                  fr="Plutôt qu’un catalogue, HandSon concentre ses moyens sur une formule cognitive et sur sa disponibilité réelle en officine."
+                  en="Rather than a catalogue, HandSon concentrates its resources on one cognitive formula and on its real availability in pharmacies."
+                />
+              </p>
+            </div>
+
+            <article className="card card-lift mt-10 overflow-hidden bg-white">
+              <div className="grid lg:grid-cols-2">
+                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-6 py-10 lg:border-r lg:border-b-0 lg:px-10 lg:py-14">
+                  <Image
+                    src="/synapgen-3d.png"
+                    alt="Boîte de Synapgen"
+                    width={1080}
+                    height={1080}
+                    className="h-auto w-full max-w-sm object-contain drop-shadow-[0_18px_34px_rgba(12,27,20,0.16)]"
+                  />
+                </div>
+
+                <div className="flex flex-col justify-center p-7 sm:p-10">
+                  <span className="chip chip-brand self-start">
+                    <T fr="Complément alimentaire" en="Dietary supplement" />
+                  </span>
+                  <h3 className="display-md mt-5">Synapgen</h3>
+                  <p className="mt-1 text-[0.9375rem] text-[var(--ink-faint)]">
+                    <T
+                      fr="Mémoire et vitalité mentale"
+                      en="Memory and mental vitality"
                     />
-                  </div>
+                  </p>
 
-                  {/* Product Info */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="badge-muted mb-4 self-start">
-                      <T fr="Complément Alimentaire" en="Dietary Supplement" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4" style={{ letterSpacing: '-0.02em' }}>
-                      Synapgen
-                    </h3>
-                    <p className="text-gray-500 mb-6 leading-relaxed text-base">
-                      <T
-                        fr="Votre allié pour une mémoire plus claire et une meilleure concentration. Soutient la mémoire, la concentration et les fonctions cognitives grâce au Magnésium L-thréonate."
-                        en="Your ally for clearer memory and better focus. Supports memory, concentration and cognitive functions with Magnesium L-thréonate."
-                      />
-                    </p>
+                  <p className="prose-hs mt-5">
+                    <T
+                      fr="Une formule au Magnésium L-thréonate, pensée pour soutenir la mémoire et la concentration au fil de la journée."
+                      en="A Magnesium L-threonate formula designed to support memory and concentration through the day."
+                    />
+                  </p>
 
-                    <div className="space-y-3 mb-8">
-                      {[
-                        { fr: "Soutien de la fonction mémorielle", en: "Supports memory function" },
-                        { fr: "Améliore la concentration", en: "Enhances concentration" },
-                        { fr: "Contient du Magnésium L-Thréonate", en: "Contains Magnesium L-thréonate" },
-                      ].map((feature, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <CheckCircle className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--handson-green)' }} />
-                          <span className="text-gray-600 text-sm">
-                            <T fr={feature.fr} en={feature.en} />
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                  <ul className="mt-6 space-y-2.5">
+                    {BENEFITS.map((benefit) => (
+                      <li
+                        key={benefit.en}
+                        className="flex items-start gap-2.5 text-[0.9375rem] text-[var(--ink-muted)]"
+                      >
+                        <Check className="mt-1 h-4 w-4 shrink-0 text-[var(--brand)]" />
+                        <span>
+                          <T fr={benefit.fr} en={benefit.en} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
 
-                    <span className="inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all duration-300" style={{ color: 'var(--handson-green)' }}>
-                      <T fr="En savoir plus" en="Learn More" />
-                      <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </div>
+                  <Link href="/products/synapgen" className="link-arrow mt-8 self-start">
+                    <T fr="Fiche produit complète" en="Full product page" />
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
-            </Link>
+            </article>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="badge-green mb-6">Contact</div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4" style={{ letterSpacing: '-0.02em' }}>
-              <T fr="Entrons en contact" en="Get In Touch" />
-            </h2>
-            <div className="section-divider mx-auto mb-6"></div>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-              <T
-                fr="Notre équipe est à votre disposition pour répondre à vos questions et accompagner vos projets."
-                en="Our team is at your disposal to answer your questions and support your projects."
-              />
-            </p>
-          </div>
+        {/* ───────────────────── Le laboratoire ─────────────────── */}
+        <section id="laboratoire" className="section scroll-mt-24 lg:scroll-mt-32">
+          <div className="shell">
+            <div className="max-w-2xl">
+              <p className="eyebrow">
+                <T fr="Le laboratoire" en="The laboratory" />
+              </p>
+              <h2 className="display-lg mt-4">
+                <T
+                  fr="Ce à quoi nous tenons."
+                  en="What we hold ourselves to."
+                />
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-8" style={{ letterSpacing: '-0.01em' }}>
-                <T fr="Informations de contact" en="Contact Information" />
-              </h3>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="icon-box icon-box-orange">
-                    <Mail className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 text-sm uppercase tracking-wide">Email</h4>
-                    <p className="text-gray-600">contact@handson.com</p>
-                  </div>
+            <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] md:grid-cols-3">
+              {COMMITMENTS.map((item) => (
+                <div key={item.title.en} className="bg-white p-7 lg:p-8">
+                  <item.icon className="h-5 w-5 text-[var(--brand)]" aria-hidden />
+                  <h3 className="mt-5 font-sans text-[1.0625rem] font-semibold">
+                    <T fr={item.title.fr} en={item.title.en} />
+                  </h3>
+                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--ink-muted)]">
+                    <T fr={item.body.fr} en={item.body.en} />
+                  </p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                <div className="flex items-start gap-4">
-                  <div className="icon-box icon-box-green">
-                    <Phone className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 text-sm uppercase tracking-wide">
-                      <T fr="Téléphone" en="Phone" />
-                    </h4>
-                    <p className="text-gray-600">+213 (0) 664117011</p>
-                    <p className="text-gray-400 text-sm mt-1">
-                      <T fr="Dim–Jeu : 9h – 18h" en="Sun–Thu: 9:00 AM – 6:00 PM" />
-                    </p>
-                  </div>
+        {/* ────────────────────── Distribution ──────────────────── */}
+        <section id="distribution" className="section section-alt scroll-mt-24 lg:scroll-mt-32">
+          <div className="shell">
+            <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow">
+                  <T fr="Distribution" en="Distribution" />
+                </p>
+                <h2 className="display-lg mt-4">
+                  <T
+                    fr="Disponible chez les grossistes répartiteurs."
+                    en="Available at pharmaceutical wholesalers."
+                  />
+                </h2>
+                <p className="lede mt-5">
+                  <T
+                    fr="Synapgen est référencé auprès des grossistes ci-contre. Votre officine peut le commander directement auprès de l’un d’eux."
+                    en="Synapgen is listed with the wholesalers shown here. Your pharmacy can order it directly from any of them."
+                  />
+                </p>
+                <p className="mt-6 inline-flex items-center gap-2 text-[0.9375rem] text-[var(--ink-muted)]">
+                  <MapPin className="h-4 w-4 text-[var(--brand)]" />
+                  <T
+                    fr="Réseau national, Algérie"
+                    en="Nationwide network, Algeria"
+                  />
+                </p>
+                <div className="mt-8">
+                  <Link href="#contact" className="link-arrow">
+                    <T
+                      fr="Demander un référencement"
+                      en="Request a listing"
+                    />
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <ContactForm />
+              <div className="lg:col-span-7">
+                <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--line)] sm:grid-cols-3">
+                  {DISTRIBUTORS.map((name) => (
+                    <li
+                      key={name}
+                      className="flex min-h-[4.75rem] items-center bg-white px-5 py-5 text-[0.9375rem] font-medium text-[var(--ink)] transition-colors hover:bg-[var(--brand-tint)]"
+                    >
+                      {name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-100" style={{ background: 'var(--handson-slate-50)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-6">
-            <HandSonLogo size="sm" />
-            <p className="text-sm text-gray-400" style={{ letterSpacing: '0.02em' }}>
-              <T fr="Solutions pharmaceutiques innovantes" en="Innovative pharmaceutical solutions" />
-            </p>
-            <div className="section-divider"></div>
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-400">
-              <span>&copy; {new Date().getFullYear()} HandSon</span>
-              <span className="hidden sm:inline">&middot;</span>
-              <span>
-                <T fr="Tous droits réservés" en="All rights reserved" />
-              </span>
+        {/* ───────────────────────  Contact ─────────────────────── */}
+        <section id="contact" className="section scroll-mt-24 lg:scroll-mt-32">
+          <div className="shell">
+            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow">Contact</p>
+                <h2 className="display-lg mt-4">
+                  <T fr="Parlons de votre besoin." en="Let’s talk." />
+                </h2>
+                <p className="lede mt-5">
+                  <T
+                    fr="Grossistes, pharmaciens, professionnels de santé : notre équipe répond aux demandes de référencement, d’approvisionnement et d’information produit."
+                    en="Wholesalers, pharmacists, health professionals: our team handles listing, supply and product information requests."
+                  />
+                </p>
+
+                <dl className="mt-9 space-y-6">
+                  <div className="flex items-start gap-4">
+                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand)]" />
+                    <div>
+                      <dt className="eyebrow eyebrow-muted">
+                        <T fr="Téléphone" en="Phone" />
+                      </dt>
+                      <dd className="mt-1">
+                        <a
+                          href="tel:+213664117011"
+                          className="tnum text-[1.0625rem] font-medium hover:text-[var(--brand)]"
+                        >
+                          +213 664 11 70 11
+                        </a>
+                        <p className="mt-1 text-[0.875rem] text-[var(--ink-faint)]">
+                          <T
+                            fr="Dimanche – jeudi, 9h – 18h"
+                            en="Sunday – Thursday, 9am – 6pm"
+                          />
+                        </p>
+                      </dd>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand)]" />
+                    <div>
+                      <dt className="eyebrow eyebrow-muted">Email</dt>
+                      <dd className="mt-1">
+                        <a
+                          href="mailto:sarl.handson@gmail.com"
+                          className="text-[1.0625rem] font-medium break-all hover:text-[var(--brand)]"
+                        >
+                          sarl.handson@gmail.com
+                        </a>
+                      </dd>
+                    </div>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="lg:col-span-7">
+                <ContactForm />
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </section>
+      </main>
+
+      <SiteFooter />
     </div>
   )
 }

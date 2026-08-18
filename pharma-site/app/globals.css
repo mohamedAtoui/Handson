@@ -1,42 +1,26 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* ═══════════════════════════════════════════════════════════════
+   HandSon — design system
+   Ground: white with a green-biased off-white for section relief.
+   Type:   Newsreader (display serif) + IBM Plex Sans (text),
+           IBM Plex Sans Arabic for the Arabic script.
+   Accent: one green does the work; orange is reserved for the
+           distribution notice and small state markers.
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+  --color-primary-foreground: var(--primary-foreground);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,386 +28,419 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.5rem;
 
-  /* HandSon Brand — refined pharmaceutical palette */
-  --handson-green: #1a9f4a;
-  --handson-green-light: #2db85e;
-  --handson-green-dark: #14793a;
-  --handson-green-tint: #edf8f1;
-  --handson-orange: #f97316;
-  --handson-orange-light: #fb923c;
-  --handson-orange-dark: #ea580c;
-  --handson-orange-tint: #fff7ed;
+  /* Ink & neutrals — biased green so they sit with the brand, not
+     against it. Never a stock mid-grey. */
+  --ink: #0c1b14;
+  --ink-muted: #46564d;
+  --ink-faint: #616f66;
+  --line: #e2e8e3;
+  --line-strong: #cfd8d2;
+  --surface: #ffffff;
+  --surface-alt: #f5f8f5;
+  --surface-sunken: #eef3ef;
 
-  /* Neutral system */
-  --handson-slate-50: #f8fafc;
-  --handson-slate-100: #f1f5f9;
-  --handson-slate-200: #e2e8f0;
-  --handson-slate-800: #1e293b;
-  --handson-slate-900: #0f172a;
+  /* Brand */
+  --brand: #107a44;
+  --brand-strong: #0b5f34;
+  --brand-soft: #3ba76c;
+  --brand-tint: #e8f3ec;
+  --accent: #e2600d;
+  --accent-strong: #c24f06;
+  --accent-tint: #fdf1e6;
 
-  /* Shadow system */
-  --shadow-soft: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --shadow-elevated: 0 20px 25px -5px rgba(0,0,0,0.07), 0 8px 10px -6px rgba(0,0,0,0.04);
-  --shadow-dramatic: 0 25px 50px -12px rgba(0,0,0,0.15);
+  /* Legacy aliases — older markup still references these. */
+  --handson-green: var(--brand);
+  --handson-green-dark: var(--brand-strong);
+  --handson-green-light: var(--brand-soft);
+  --handson-green-tint: var(--brand-tint);
+  --handson-orange: var(--accent);
+  --handson-orange-dark: var(--accent-strong);
+  --handson-slate-50: var(--surface-alt);
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  --shadow-soft: 0 1px 2px rgba(12, 27, 20, 0.05);
+  --shadow-card: 0 1px 2px rgba(12, 27, 20, 0.04), 0 8px 24px -16px rgba(12, 27, 20, 0.18);
+  --shadow-lift: 0 2px 4px rgba(12, 27, 20, 0.05), 0 18px 40px -24px rgba(12, 27, 20, 0.28);
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* shadcn primitives, retuned to the palette above */
+  --background: var(--surface);
+  --foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: #ffffff;
+  --muted-foreground: var(--ink-muted);
+  --destructive: #b42318;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--brand);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans), "Segoe UI", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    font-feature-settings: "kern", "liga";
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  h4,
+  h5,
+  h6 {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  /* Arabic runs get the matching Plex cut. */
+  :lang(ar) {
+    font-family: var(--font-arabic), var(--font-sans), sans-serif;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--brand-tint);
+    color: var(--ink);
   }
 }
 
-/* ═══════════════════════════════════════
-   HandSon Design System — Clinical Luxury
-   ═══════════════════════════════════════ */
+/* ─────────────────────────── Layout ─────────────────────────── */
 
-/* Brand badge pills */
-.badge-green {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  background-color: var(--handson-green);
-  color: white;
+.shell {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
 }
 
-.badge-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border: 1.5px solid var(--handson-green);
-  color: var(--handson-green);
-  background: var(--handson-green-tint);
+@media (min-width: 768px) {
+  .shell { padding-inline: 2rem; }
 }
 
-.badge-muted {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
+.section {
+  padding-block: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  .section { padding-block: 6.5rem; }
+}
+
+.section-alt {
+  background: var(--surface-alt);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* ───────────────────────── Typography ───────────────────────── */
+
+.display-xl {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.5rem, 1.7rem + 3.1vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   font-weight: 500;
-  background: var(--handson-slate-100);
-  color: var(--handson-slate-800);
 }
 
-/* Icon box for contact items */
-.icon-box {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.display-lg {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.875rem, 1.4rem + 1.7vw, 2.625rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 500;
 }
 
-.icon-box-green {
-  background: linear-gradient(135deg, var(--handson-green), var(--handson-green-dark));
-  color: white;
-  box-shadow: 0 4px 12px rgba(26, 159, 74, 0.25);
+.display-md {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 500;
 }
 
-.icon-box-orange {
-  background: linear-gradient(135deg, var(--handson-orange), var(--handson-orange-dark));
-  color: white;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
 
-/* Brand CTA button */
-.btn-handson {
+.eyebrow-muted {
+  color: var(--ink-faint);
+}
+
+.lede {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+}
+
+.prose-hs {
+  color: var(--ink-muted);
+  max-width: 62ch;
+}
+
+.prose-hs p + p {
+  margin-top: 1rem;
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ────────────────────────── Controls ────────────────────────── */
+
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 2rem;
-  border-radius: 0.75rem;
+  height: 3rem;
+  padding-inline: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  background: var(--brand-strong);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink-faint);
+  background: var(--surface-alt);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Text link that grows an arrow on hover. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-weight: 600;
   font-size: 0.9375rem;
-  letter-spacing: 0.01em;
-  color: white;
-  background: linear-gradient(135deg, var(--handson-green), var(--handson-green-dark));
-  box-shadow: 0 4px 14px rgba(26, 159, 74, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  border: none;
+  color: var(--brand);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s ease, gap 0.18s ease;
 }
 
-.btn-handson:hover {
+.link-arrow:hover {
+  border-bottom-color: currentColor;
+  gap: 0.7rem;
+}
+
+.nav-link {
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+  border-bottom: 1px solid transparent;
+  padding-block: 0.15rem;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.nav-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--line-strong);
+}
+
+/* ─────────────────────────── Surfaces ───────────────────────── */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+
+.card-lift {
+  transition: border-color 0.22s ease, box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.card-lift:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lift);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(26, 159, 74, 0.35);
-  background: linear-gradient(135deg, var(--handson-green-light), var(--handson-green));
 }
 
-.btn-handson:active {
-  transform: translateY(0);
-}
-
-/* Section divider — brand gradient accent line */
-.section-divider {
-  width: 60px;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--handson-green), var(--handson-orange));
-}
-
-/* Dot pattern background overlay */
-.bg-dots {
-  background-image: radial-gradient(circle, rgba(26, 159, 74, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Hero gradient */
-.hero-gradient {
+.panel-tint {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(26, 159, 74, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(249, 115, 22, 0.05), transparent),
-    linear-gradient(180deg, var(--handson-slate-50) 0%, #ffffff 50%, var(--handson-green-tint) 100%);
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(16, 122, 68, 0.07), transparent 70%),
+    var(--surface-alt);
 }
 
-/* ─── 3D Product Box ─── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
 
-.product-box-container {
-  perspective: 1000px;
+.chip-brand {
+  border-color: rgba(16, 122, 68, 0.26);
+  background: var(--brand-tint);
+  color: var(--brand-strong);
+}
+
+/* Form fields */
+.field {
+  width: 100%;
+  height: 3rem;
+  padding-inline: 0.875rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+textarea.field {
+  height: auto;
+  padding-block: 0.75rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.field::placeholder {
+  color: var(--ink-faint);
+  opacity: 0.75;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(16, 122, 68, 0.16);
+}
+
+.field-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 0.4rem;
+}
+
+/* ─────────────────── Product photography stage ──────────────── */
+
+.product-stage {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem 3rem;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.product-box-container {
+  perspective: 1200px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem 3.5rem;
 }
 
 .product-box-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 26rem;
   transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-  transform: rotateY(0deg) rotateX(0deg);
   transform-style: preserve-3d;
 }
 
 .product-box-wrapper:hover {
-  transform: rotateY(-4deg) rotateX(2deg) scale(1.05);
+  transform: rotateY(-4deg) rotateX(2deg) scale(1.03);
 }
 
 .product-box-image {
-  border-radius: 6px;
-  filter:
-    drop-shadow(0 30px 60px rgba(0, 0, 0, 0.25))
-    drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15))
-    drop-shadow(0 5px 8px rgba(0, 0, 0, 0.1));
-  transition: filter 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: drop-shadow(0 24px 44px rgba(12, 27, 20, 0.18))
+    drop-shadow(0 8px 14px rgba(12, 27, 20, 0.1));
 }
 
-.product-box-wrapper:hover .product-box-image {
-  filter:
-    drop-shadow(0 35px 70px rgba(0, 0, 0, 0.3))
-    drop-shadow(0 18px 30px rgba(0, 0, 0, 0.18))
-    drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
-}
-
-/* Ground shadow — elongated ellipse for depth */
 .product-box-reflection {
   position: absolute;
-  bottom: -24px;
-  left: 5%;
-  right: 5%;
-  height: 50px;
-  background: radial-gradient(ellipse 90% 100% at center, rgba(0, 0, 0, 0.15) 0%, transparent 65%);
+  bottom: -22px;
+  left: 8%;
+  right: 8%;
+  height: 44px;
+  background: radial-gradient(
+    ellipse 90% 100% at center,
+    rgba(12, 27, 20, 0.14) 0%,
+    transparent 65%
+  );
   filter: blur(12px);
-  transition: all 0.7s ease;
-  transform: scaleX(0.9);
 }
 
-.product-box-wrapper:hover .product-box-reflection {
-  opacity: 0.6;
-  transform: scaleX(1);
-  bottom: -28px;
-}
+/* ─────────────────── Announcement marquee ───────────────────── */
 
-/* ─── Smooth scroll & selection ─── */
-html {
-  scroll-behavior: smooth;
-}
-
-::selection {
-  background: rgba(26, 159, 74, 0.15);
-  color: var(--handson-slate-900);
-}
-
-/* ─── Animations ─── */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  opacity: 0;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease forwards;
-  opacity: 0;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  opacity: 0;
-}
-
-/* Product card hover */
-.product-card {
-  box-shadow: var(--shadow-card);
-}
-
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-dramatic);
-}
-
-.animation-delay-100 { animation-delay: 100ms; }
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-500 { animation-delay: 500ms; }
-
-/* Synapgen banner — gentle "dance" wobble for the product chip */
-@keyframes synapgen-dance {
-  0%, 100% { transform: rotate(-4deg) translateY(0); }
-  25%      { transform: rotate(3deg)  translateY(-1.5px); }
-  50%      { transform: rotate(-2deg) translateY(0); }
-  75%      { transform: rotate(4deg)  translateY(-1.5px); }
-}
-
-.synapgen-dance {
-  animation: synapgen-dance 2.4s ease-in-out infinite;
-  transform-origin: center;
-  will-change: transform;
-}
-
-/* Announcement banner — distributor marquee.
-   Two identical groups sit side by side inside the track; shifting the
-   track by exactly half its width loops seamlessly. The duration is
-   tuned for a calm, readable ~50px/s scroll. */
 .marquee {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0,
-    #000 20px,
-    #000 calc(100% - 20px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0,
-    #000 20px,
-    #000 calc(100% - 20px),
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
 }
 
 .marquee-track {
@@ -453,17 +470,15 @@ html {
   gap: 0.55rem;
   padding: 0 0.7rem;
   white-space: nowrap;
-  color: #fef9c3;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.01em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
 }
 
 .marquee-dot {
   width: 4px;
   height: 4px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.6);
   flex: none;
 }
 
@@ -472,18 +487,46 @@ html {
   to   { transform: translateX(-50%); }
 }
 
-/* Motion-sensitive visitors get a static, horizontally scrollable list
-   instead of an animated one. */
-@media (prefers-reduced-motion: reduce) {
-  .synapgen-dance { animation: none; }
-
-  .marquee { overflow-x: auto; }
-  .marquee-track { animation: none; }
-  .marquee-group[aria-hidden="true"] { display: none; }
+/* Product chip in the notice — a gentle wobble, nothing more. */
+@keyframes synapgen-dance {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50%      { transform: rotate(3deg) translateY(-1.5px); }
 }
 
-/* ────────────────────────────────────────────
-   Language toggle — show only the active locale
-   ──────────────────────────────────────────── */
+.synapgen-dance {
+  animation: synapgen-dance 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* ───────────────────────── Entrance ─────────────────────────── */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-1 { animation-delay: 90ms; }
+.delay-2 { animation-delay: 180ms; }
+.delay-3 { animation-delay: 270ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .rise-in,
+  .synapgen-dance,
+  .marquee-track { animation: none; }
+
+  .marquee { overflow-x: auto; }
+  .marquee-group[aria-hidden="true"] { display: none; }
+
+  .product-box-wrapper,
+  .card-lift { transition: none; }
+}
+
+/* ──────────────── Language toggle — show one locale ─────────── */
 html[data-lang="fr"] [data-lang-only="en"] { display: none; }
 html[data-lang="en"] [data-lang-only="fr"] { display: none; }

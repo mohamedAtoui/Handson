@@ -13,9 +13,9 @@ export default function ProductBox3D({ className = "" }: ProductBox3DProps) {
         <Image
           src="/synapgen-3d.png"
           alt="Synapgen - Memory and Mental Vitality Supplement by HandSon"
-          width={560}
-          height={560}
-          className="product-box-image object-contain"
+          width={1080}
+          height={1080}
+          className="product-box-image h-auto w-full object-contain"
           priority
         />
         <div className="product-box-reflection" aria-hidden="true" />
