@@ -23,18 +23,21 @@ environment variables:
 
 ## How it is put together
 
-- `app/page.tsx` — home: hero, product, laboratory, distribution, contact.
+- `app/page.tsx` — home: hero, products, contact.
 - `app/products/synapgen/page.tsx` — product page, including its JSON-LD.
 - `app/globals.css` — the design system: colour and type tokens, then the
   layout, typography, control and surface classes everything else composes.
-- `components/site-header.tsx`, `site-footer.tsx` — shared chrome.
+- `components/site-header.tsx`, `site-footer.tsx` — shared chrome. The header
+  takes `variant="back"` on the product page.
 - `components/announcement-banner.tsx` — distribution notice with the
   scrolling wholesaler list.
-- `components/distributors.ts` — single source for the wholesaler names, used
-  by the banner, both pages and the footer.
+- `components/distributors.ts` — single source for the wholesaler names.
 - `components/i18n.tsx` — French/English switching. `<T fr en />` renders both
   locales and CSS reveals the active one, so every page stays static and
-  indexable in both languages; `useLang()` is for strings needed as attributes.
+  indexable in both languages.
+
+Site copy is deliberately unchanged from the original wording — this codebase
+separates design from content, so restyling never rewrites the text.
 
 ## Design system in short
 

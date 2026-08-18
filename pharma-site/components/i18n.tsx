@@ -20,25 +20,6 @@ export function T({ fr, en }: { fr: ReactNode; en: ReactNode }) {
   );
 }
 
-/** The active locale, tracked from the <html data-lang> attribute. */
-export function useLang(): Lang {
-  const [lang, setLang] = useState<Lang>("fr");
-
-  useEffect(() => {
-    const read = () =>
-      setLang(document.documentElement.dataset.lang === "en" ? "en" : "fr");
-    read();
-    const observer = new MutationObserver(read);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-lang"],
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  return lang;
-}
-
 export function LanguageToggle() {
   const [lang, setLang] = useState<Lang>("fr");
 

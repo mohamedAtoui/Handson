@@ -31,25 +31,23 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sarlhandson.com"),
   title: {
-    default: "HandSon — Laboratoire pharmaceutique algérien",
+    default: "HandSon - Innovative Pharmaceutical Solutions",
     template: "%s | HandSon",
   },
   description:
-    "HandSon, laboratoire pharmaceutique algérien. Compléments alimentaires pour la mémoire, la concentration et les fonctions cognitives, distribués par les grossistes répartiteurs en Algérie.",
+    "HandSon - Innovative pharmaceutical solutions including dietary supplements for memory, cognitive function and mental vitality.",
   keywords: [
     "HandSon",
-    "SARL HandSon",
-    "laboratoire pharmaceutique Algérie",
-    "complément alimentaire",
+    "pharmaceutical",
+    "supplements",
     "Synapgen",
-    "Magnésium L-thréonate",
-    "mémoire",
-    "concentration",
-    "fonctions cognitives",
+    "Magnesium",
+    "memory",
+    "cognitive function",
   ],
   openGraph: {
     type: "website",
-    locale: "fr_DZ",
+    locale: "en_US",
     url: "https://www.sarlhandson.com",
     siteName: "HandSon",
   },

@@ -41,11 +41,11 @@ export default function AnnouncementBanner() {
 
             <span className="font-semibold whitespace-nowrap">
               <span data-lang-only="fr" lang="fr">
-                <span className="hidden sm:inline">Synapgen · </span>
+                <span className="hidden sm:inline">Synapgen — </span>
                 Disponible en Algérie chez&nbsp;:
               </span>
               <span data-lang-only="en" lang="en">
-                <span className="hidden sm:inline">Synapgen · </span>
+                <span className="hidden sm:inline">Synapgen — </span>
                 Available in Algeria at:
               </span>
             </span>

@@ -2,45 +2,18 @@
 
 import type React from "react"
 import { useState } from "react"
-import { AlertCircle, Check, Send } from "lucide-react"
-import { T, useLang } from "@/components/i18n"
-
-const COPY = {
-  fr: {
-    name: "Nom et prénom",
-    namePlaceholder: "Votre nom",
-    email: "Email",
-    emailPlaceholder: "vous@exemple.com",
-    org: "Objet",
-    orgPlaceholder: "Référencement, approvisionnement…",
-    message: "Message",
-    messagePlaceholder: "Décrivez votre demande",
-  },
-  en: {
-    name: "Full name",
-    namePlaceholder: "Your name",
-    email: "Email",
-    emailPlaceholder: "you@example.com",
-    org: "Subject",
-    orgPlaceholder: "Listing, supply…",
-    message: "Message",
-    messagePlaceholder: "Describe your request",
-  },
-} as const
+import { Check, Send } from "lucide-react"
 
 export default function ContactForm() {
-  const lang = useLang()
-  const t = COPY[lang]
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   })
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle",
-  )
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -51,7 +24,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setStatus("sending")
+    setIsSubmitting(true)
 
     try {
       const response = await fetch("/api/contact", {
@@ -59,28 +32,28 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-      if (!response.ok) throw new Error("Request failed")
 
-      setStatus("sent")
+      if (!response.ok) {
+        throw new Error("Failed to send message")
+      }
+
+      setSubmitSuccess(true)
       setFormData({ name: "", email: "", subject: "", message: "" })
-    } catch {
-      setStatus("error")
+    } catch (error) {
+      console.error("Error sending message:", error)
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setSubmitSuccess(false), 5000)
     }
   }
 
   return (
     <div className="card bg-white p-6 sm:p-8">
       <h3 className="font-sans text-[1.0625rem] font-semibold">
-        <T fr="Écrire à l’équipe" en="Write to the team" />
+        Send us a message
       </h3>
-      <p className="mt-1.5 text-[0.875rem] text-[var(--ink-faint)]">
-        <T
-          fr="Nous répondons sous un jour ouvré."
-          en="We reply within one business day."
-        />
-      </p>
 
-      {status === "sent" ? (
+      {submitSuccess ? (
         <p
           role="status"
           className="mt-6 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-[0.9375rem]"
@@ -92,25 +65,7 @@ export default function ContactForm() {
         >
           <Check className="mt-0.5 h-4 w-4 shrink-0" />
           <span>
-            <T
-              fr="Message envoyé. Nous revenons vers vous rapidement."
-              en="Message sent. We will get back to you shortly."
-            />
-          </span>
-        </p>
-      ) : null}
-
-      {status === "error" ? (
-        <p
-          role="alert"
-          className="mt-6 flex items-start gap-2.5 rounded-lg border border-[#f0c9c5] bg-[#fdf3f2] px-4 py-3 text-[0.9375rem] text-[#8f2b21]"
-        >
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>
-            <T
-              fr="L’envoi a échoué. Écrivez-nous à sarl.handson@gmail.com ou réessayez."
-              en="Sending failed. Email sarl.handson@gmail.com or try again."
-            />
+            Message sent successfully! We will respond as soon as possible.
           </span>
         </p>
       ) : null}
@@ -119,7 +74,7 @@ export default function ContactForm() {
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="name" className="field-label">
-              {t.name}
+              Full Name
             </label>
             <input
               id="name"
@@ -127,14 +82,14 @@ export default function ContactForm() {
               className="field"
               value={formData.name}
               onChange={handleChange}
-              placeholder={t.namePlaceholder}
+              placeholder="Your name"
               autoComplete="name"
               required
             />
           </div>
           <div>
             <label htmlFor="email" className="field-label">
-              {t.email}
+              Email
             </label>
             <input
               id="email"
@@ -143,7 +98,7 @@ export default function ContactForm() {
               className="field"
               value={formData.email}
               onChange={handleChange}
-              placeholder={t.emailPlaceholder}
+              placeholder="your@email.com"
               autoComplete="email"
               required
             />
@@ -152,7 +107,7 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="subject" className="field-label">
-            {t.org}
+            Subject
           </label>
           <input
             id="subject"
@@ -160,14 +115,14 @@ export default function ContactForm() {
             className="field"
             value={formData.subject}
             onChange={handleChange}
-            placeholder={t.orgPlaceholder}
+            placeholder="Subject of your message"
             required
           />
         </div>
 
         <div>
           <label htmlFor="message" className="field-label">
-            {t.message}
+            Message
           </label>
           <textarea
             id="message"
@@ -176,22 +131,18 @@ export default function ContactForm() {
             className="field"
             value={formData.message}
             onChange={handleChange}
-            placeholder={t.messagePlaceholder}
+            placeholder="Describe your request in detail..."
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary w-full"
-          disabled={status === "sending"}
-        >
-          {status === "sending" ? (
-            <T fr="Envoi…" en="Sending…" />
+        <button type="submit" className="btn btn-primary w-full" disabled={isSubmitting}>
+          {isSubmitting ? (
+            "Sending..."
           ) : (
             <>
               <Send className="h-4 w-4" />
-              <T fr="Envoyer le message" en="Send message" />
+              Send Message
             </>
           )}
         </button>
