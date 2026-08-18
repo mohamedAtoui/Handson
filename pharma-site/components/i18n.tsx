@@ -44,7 +44,7 @@ export function LanguageToggle() {
     <div
       role="group"
       aria-label="Langue"
-      className="inline-flex items-center rounded-md border border-[var(--line-strong)] p-0.5 text-[0.6875rem] font-semibold tracking-[0.08em]"
+      className="inline-flex items-center rounded-md border border-[var(--line-strong)] p-0.5 text-xs font-semibold tracking-[0.08em] sm:text-[0.6875rem]"
     >
       {(["fr", "en"] as const).map((code) => (
         <button
@@ -52,7 +52,7 @@ export function LanguageToggle() {
           type="button"
           onClick={() => choose(code)}
           aria-pressed={lang === code}
-          className={`rounded px-2 py-1 transition-colors ${
+          className={`rounded px-2.5 py-2 transition-colors sm:px-2 sm:py-1 ${
             lang === code
               ? "bg-[var(--ink)] text-white"
               : "text-[var(--ink-faint)] hover:text-[var(--ink)]"
