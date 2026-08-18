@@ -1,17 +1,5 @@
 import Image from "next/image";
-
-/** Wholesalers distributing Synapgen in Algeria. */
-const DISTRIBUTORS = [
-  "Pharmainvest",
-  "UPROmedic",
-  "Somepharm",
-  "Setid Medic 2",
-  "Setifismed",
-  "Timelouka",
-  "Setif Medic",
-  "Attia Pharm",
-  "Youghorta",
-];
+import { DISTRIBUTORS } from "@/components/distributors";
 
 function DistributorGroup({ hidden = false }: { hidden?: boolean }) {
   return (
@@ -26,45 +14,50 @@ function DistributorGroup({ hidden = false }: { hidden?: boolean }) {
   );
 }
 
+/**
+ * Distribution notice — where the product can actually be sourced.
+ * The lead-in stays put; only the wholesaler names travel.
+ */
 export default function AnnouncementBanner() {
   return (
     <aside
-      aria-label="Distribution notice"
-      className="sticky top-16 z-40 bg-gradient-to-r from-[var(--handson-orange)] to-[var(--handson-orange-dark)] text-white shadow-md py-2.5 sm:py-3"
+      aria-label="Distribution"
+      className="z-40 text-white lg:sticky lg:top-16"
+      style={{ background: "var(--accent-strong)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-1 lg:flex-row lg:gap-4 font-semibold tracking-tight text-[12px] sm:text-[15px]">
-          {/* Fixed lead-in: product chip + headline stay put so the
-              scrolling names always keep their context. */}
-          <span className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <span className="synapgen-dance inline-flex items-center justify-center h-8 sm:h-10 aspect-square drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+      <div className="shell">
+        <div className="flex flex-col items-center gap-1 py-2 text-[12.5px] sm:text-sm lg:flex-row lg:gap-5 lg:py-2.5">
+          <span className="flex shrink-0 items-center gap-2.5">
+            <span className="synapgen-dance inline-flex aspect-square h-7 items-center justify-center sm:h-8">
               <Image
                 src="/synapgen-3d.png"
-                alt="Synapgen"
+                alt=""
                 width={64}
                 height={64}
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain drop-shadow-[0_2px_5px_rgba(0,0,0,0.3)]"
                 priority
               />
             </span>
 
-            <span data-lang-only="fr" lang="fr" className="whitespace-nowrap">
-              <span className="hidden sm:inline">Synapgen — </span>
-              Disponible en Algérie chez&nbsp;:
-            </span>
-            <span data-lang-only="en" lang="en" className="whitespace-nowrap">
-              <span className="hidden sm:inline">Synapgen — </span>
-              Available in Algeria at:
+            <span className="font-semibold whitespace-nowrap">
+              <span data-lang-only="fr" lang="fr">
+                <span className="hidden sm:inline">Synapgen — </span>
+                Disponible en Algérie chez&nbsp;:
+              </span>
+              <span data-lang-only="en" lang="en">
+                <span className="hidden sm:inline">Synapgen — </span>
+                Available in Algeria at:
+              </span>
             </span>
 
             <span
               aria-hidden
-              className="hidden xl:inline-block w-px h-4 bg-white/40"
+              className="hidden h-3.5 w-px bg-white/40 xl:inline-block"
             />
             <span
               dir="rtl"
               lang="ar"
-              className="hidden xl:inline whitespace-nowrap"
+              className="hidden font-medium whitespace-nowrap xl:inline"
             >
               متوفر في الجزائر لدى&nbsp;:
             </span>
@@ -72,10 +65,9 @@ export default function AnnouncementBanner() {
 
           <span
             aria-hidden
-            className="hidden lg:inline-block w-px h-4 bg-white/40 shrink-0"
+            className="hidden h-3.5 w-px shrink-0 bg-white/40 lg:inline-block"
           />
 
-          {/* Continuously scrolling distributor list. */}
           <div className="marquee w-full min-w-0 lg:flex-1">
             <div className="marquee-track">
               <DistributorGroup />

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HandSon — sarlhandson.com
 
-## Getting Started
+Corporate site for SARL HandSon, an Algerian pharmaceutical laboratory, and its
+product Synapgen. Built with Next.js (App Router), React 19 and Tailwind CSS v4.
 
-First, run the development server:
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm start       # serve the production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`POST /api/contact` sends the contact form through SendGrid and needs two
+environment variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable            | Purpose                                            |
+| ------------------- | -------------------------------------------------- |
+| `SENDGRID_API_KEY`  | SendGrid API key                                   |
+| `ADMIN_EMAIL`       | Recipient — must be a verified SendGrid sender      |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How it is put together
 
-## Learn More
+- `app/page.tsx` — home: hero, products, contact.
+- `app/products/synapgen/page.tsx` — product page, including its JSON-LD.
+- `app/globals.css` — the design system: colour and type tokens, then the
+  layout, typography, control and surface classes everything else composes.
+- `components/site-header.tsx`, `site-footer.tsx` — shared chrome. The header
+  takes `variant="back"` on the product page.
+- `components/announcement-banner.tsx` — distribution notice with the
+  scrolling wholesaler list.
+- `components/distributors.ts` — single source for the wholesaler names.
+- `components/i18n.tsx` — French/English switching. `<T fr en />` renders both
+  locales and CSS reveals the active one, so every page stays static and
+  indexable in both languages.
 
-To learn more about Next.js, take a look at the following resources:
+Site copy is deliberately unchanged from the original wording — this codebase
+separates design from content, so restyling never rewrites the text.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design system in short
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Newsreader for headings, IBM Plex Sans for text, IBM Plex Sans Arabic for the
+Arabic script. One green carries the brand; orange is reserved for the
+distribution notice. All text pairs meet WCAG AA, motion respects
+`prefers-reduced-motion`, and colours are defined once as tokens in
+`:root` — style through the tokens rather than hard-coding hex values.

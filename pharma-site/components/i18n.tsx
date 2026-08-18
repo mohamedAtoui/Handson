@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 type Lang = "fr" | "en";
 const STORAGE_KEY = "hs_lang";
 
+/**
+ * Renders both locales and lets CSS reveal the active one, so the
+ * markup stays static and indexable. Use `useLang` when a string is
+ * needed as an attribute rather than as visible text.
+ */
 export function T({ fr, en }: { fr: ReactNode; en: ReactNode }) {
   return (
     <>
@@ -19,8 +24,10 @@ export function LanguageToggle() {
   const [lang, setLang] = useState<Lang>("fr");
 
   useEffect(() => {
-    const stored = (typeof window !== "undefined" &&
-      (localStorage.getItem(STORAGE_KEY) as Lang | null)) || null;
+    const stored =
+      (typeof window !== "undefined" &&
+        (localStorage.getItem(STORAGE_KEY) as Lang | null)) ||
+      null;
     if (stored === "fr" || stored === "en") setLang(stored);
   }, []);
 
@@ -36,33 +43,24 @@ export function LanguageToggle() {
   return (
     <div
       role="group"
-      aria-label="Language"
-      className="inline-flex items-center rounded-full border border-gray-200 bg-white p-0.5 text-[11px] font-semibold tracking-wide shadow-sm"
+      aria-label="Langue"
+      className="inline-flex items-center rounded-md border border-[var(--line-strong)] p-0.5 text-[0.6875rem] font-semibold tracking-[0.08em]"
     >
-      <button
-        type="button"
-        onClick={() => choose("fr")}
-        aria-pressed={lang === "fr"}
-        className={`rounded-full px-2.5 py-1 transition-colors ${
-          lang === "fr"
-            ? "bg-[var(--handson-green)] text-white"
-            : "text-gray-500 hover:text-gray-800"
-        }`}
-      >
-        FR
-      </button>
-      <button
-        type="button"
-        onClick={() => choose("en")}
-        aria-pressed={lang === "en"}
-        className={`rounded-full px-2.5 py-1 transition-colors ${
-          lang === "en"
-            ? "bg-[var(--handson-green)] text-white"
-            : "text-gray-500 hover:text-gray-800"
-        }`}
-      >
-        EN
-      </button>
+      {(["fr", "en"] as const).map((code) => (
+        <button
+          key={code}
+          type="button"
+          onClick={() => choose(code)}
+          aria-pressed={lang === code}
+          className={`rounded px-2 py-1 transition-colors ${
+            lang === code
+              ? "bg-[var(--ink)] text-white"
+              : "text-[var(--ink-faint)] hover:text-[var(--ink)]"
+          }`}
+        >
+          {code.toUpperCase()}
+        </button>
+      ))}
     </div>
   );
 }
