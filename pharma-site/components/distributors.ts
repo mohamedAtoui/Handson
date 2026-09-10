@@ -9,4 +9,6 @@ export const DISTRIBUTORS = [
   "Setif Medic",
   "Attia Pharm",
   "Youghorta",
+  "GH MED",
+  "Hydrapharm",
 ] as const;
