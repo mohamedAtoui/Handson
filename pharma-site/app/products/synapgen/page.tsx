@@ -160,7 +160,7 @@ export default function SynapgenPage() {
             <div className="shell">
               <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
                 <div className="lg:col-span-6">
-                  <div className="product-stage panel-tint min-h-[24rem] lg:sticky lg:top-28 lg:min-h-[30rem]">
+                  <div className="product-stage panel-tint min-h-[19rem] sm:min-h-[24rem] lg:sticky lg:top-28 lg:min-h-[30rem]">
                     <ProductBox3D />
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default function SynapgenPage() {
 
                 <div className="lg:col-span-5">
                   <div
-                    className="card p-6 sm:p-7"
+                    className="card card-bleed p-5 sm:p-7"
                     style={{
                       background: "var(--brand-tint)",
                       borderColor: "rgba(16,122,68,0.2)",
@@ -316,14 +316,14 @@ export default function SynapgenPage() {
                     <div className="mt-6 flex flex-col gap-3 text-[0.9375rem]">
                       <a
                         href="tel:+213664117011"
-                        className="inline-flex items-center gap-2.5 font-medium hover:text-[var(--brand-strong)]"
+                        className="inline-flex items-center gap-2.5 py-1 font-medium hover:text-[var(--brand-strong)]"
                       >
                         <Phone className="h-4 w-4 text-[var(--brand)]" />
                         <span className="tnum">+213 664 11 70 11</span>
                       </a>
                       <a
                         href="mailto:sarl.handson@gmail.com"
-                        className="inline-flex items-center gap-2.5 font-medium hover:text-[var(--brand-strong)]"
+                        className="inline-flex items-center gap-2.5 py-1 font-medium hover:text-[var(--brand-strong)]"
                       >
                         <Mail className="h-4 w-4 shrink-0 text-[var(--brand)]" />
                         <span className="break-all">sarl.handson@gmail.com</span>
