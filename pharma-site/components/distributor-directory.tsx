@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { DISTRIBUTORS, DISTRIBUTOR_LOGOS } from "@/components/distributors";
+import { DISTRIBUTORS } from "@/components/distributors";
 import { T } from "@/components/i18n";
 
 /** A clear, static directory for pharmacists to find Synapgen distributors. */
@@ -20,30 +19,14 @@ export default function DistributorDirectory() {
         </div>
 
         <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-start gap-x-4 gap-y-5 sm:mt-7 sm:grid-cols-3 lg:grid-cols-6">
-          {DISTRIBUTORS.map((name) => {
-            const logo = DISTRIBUTOR_LOGOS[name];
-            return (
-              <li
-                key={name}
-                className="flex min-w-0 flex-col items-center gap-2 text-center"
-              >
-                <div aria-hidden="true" className="flex h-9 w-full items-center justify-center">
-                  {logo && (
-                    <Image
-                      src={logo}
-                      alt=""
-                      width={120}
-                      height={32}
-                      className="h-8 w-full max-w-[120px] object-contain"
-                    />
-                  )}
-                </div>
-                <span className="text-sm font-semibold leading-5 text-[var(--ink-muted)]">
-                  {name}
-                </span>
-              </li>
-            );
-          })}
+          {DISTRIBUTORS.map((name) => (
+            <li
+              key={name}
+              className="min-w-0 text-center text-sm font-semibold leading-5 text-[var(--ink-muted)]"
+            >
+              {name}
+            </li>
+          ))}
         </ul>
       </div>
     </section>
