@@ -22,7 +22,7 @@ export default function DistributorDirectory() {
           {DISTRIBUTORS.map((name) => (
             <li
               key={name}
-              className="min-w-0 text-center text-lg font-semibold leading-7 text-[var(--ink)] sm:text-xl"
+              className="min-w-0 text-center text-base font-semibold leading-6 text-[var(--ink-muted)]"
             >
               {name}
             </li>
