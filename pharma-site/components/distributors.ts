@@ -24,3 +24,11 @@ export const DISTRIBUTOR_WILAYAS = [
 export const DISTRIBUTORS = DISTRIBUTOR_WILAYAS.flatMap(
   ({ distributors }) => distributors,
 );
+
+/** Verified assets from official company websites; absent logos use text. */
+export const DISTRIBUTOR_LOGOS: Partial<Record<(typeof DISTRIBUTORS)[number], string>> = {
+  Pharmainvest: "/distributors/pharmainvest.png",
+  UPROmedic: "/distributors/upromedic.png",
+  Somepharm: "/distributors/somepharm.png",
+  Hydrapharm: "/distributors/hydrapharm.png",
+};

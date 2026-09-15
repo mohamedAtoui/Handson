@@ -1,4 +1,5 @@
-import { DISTRIBUTOR_WILAYAS } from "@/components/distributors";
+import Image from "next/image";
+import { DISTRIBUTORS, DISTRIBUTOR_LOGOS } from "@/components/distributors";
 import { T } from "@/components/i18n";
 
 /** A clear, static directory for pharmacists to find Synapgen distributors. */
@@ -21,27 +22,30 @@ export default function DistributorDirectory() {
           </h2>
         </div>
 
-        <div className="mx-auto mt-5 grid max-w-4xl items-start gap-4 md:grid-cols-2 sm:mt-6 sm:gap-5">
-          {DISTRIBUTOR_WILAYAS.map(({ wilaya, distributors }) => (
-            <article
-              key={wilaya}
-              className="overflow-hidden rounded-lg border border-[var(--line-strong)] bg-white"
-            >
-              <header className="border-b border-[var(--line)] bg-[var(--surface-alt)] px-5 py-3">
-                <h3 className="font-sans text-lg font-semibold text-[var(--brand-strong)]">
-                  {wilaya}
-                </h3>
-              </header>
-              <ul className="divide-y divide-[var(--line)] px-5">
-                {distributors.map((name) => (
-                  <li key={name} className="py-2 text-[0.9375rem] font-medium leading-6 text-[var(--ink)]">
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
+        <ul className="mx-auto mt-5 grid max-w-4xl grid-cols-2 overflow-hidden rounded-lg border border-[var(--line)] bg-white sm:grid-cols-3 lg:grid-cols-4">
+          {DISTRIBUTORS.map((name) => {
+            const logo = DISTRIBUTOR_LOGOS[name];
+            return (
+              <li
+                key={name}
+                className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 border-b border-[var(--line)] px-3 py-2 text-center"
+              >
+                {logo && (
+                  <Image
+                    src={logo}
+                    alt=""
+                    width={120}
+                    height={32}
+                    className="h-8 w-full max-w-[120px] object-contain"
+                  />
+                )}
+                <span className="text-sm font-semibold leading-5 text-[var(--ink)]">
+                  {name}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
