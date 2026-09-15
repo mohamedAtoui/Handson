@@ -18,11 +18,11 @@ export default function DistributorDirectory() {
           </h2>
         </div>
 
-        <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-start gap-x-4 gap-y-5 sm:mt-7 sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="mx-auto mt-6 grid max-w-5xl grid-cols-2 items-start gap-x-4 gap-y-5 sm:mt-7 sm:grid-cols-3 lg:grid-cols-4">
           {DISTRIBUTORS.map((name) => (
             <li
               key={name}
-              className="min-w-0 text-center text-sm font-semibold leading-5 text-[var(--ink-muted)]"
+              className="min-w-0 text-center text-lg font-semibold leading-7 text-[var(--ink)] sm:text-xl"
             >
               {name}
             </li>
