@@ -19,24 +19,26 @@ export default function DistributorDirectory() {
           </h2>
         </div>
 
-        <ul className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:mt-7">
+        <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-start gap-x-4 gap-y-5 sm:mt-7 sm:grid-cols-3 lg:grid-cols-6">
           {DISTRIBUTORS.map((name) => {
             const logo = DISTRIBUTOR_LOGOS[name];
             return (
               <li
                 key={name}
-                className="flex min-h-14 w-[calc(50%-0.75rem)] min-w-0 flex-col items-center justify-center gap-1.5 text-center sm:w-32"
+                className="flex min-w-0 flex-col items-center gap-2 text-center"
               >
-                {logo && (
-                  <Image
-                    src={logo}
-                    alt=""
-                    width={120}
-                    height={32}
-                    className="h-8 w-full max-w-[120px] object-contain"
-                  />
-                )}
-                <span className={logo ? "text-xs font-medium leading-4 text-[var(--ink-muted)]" : "text-base font-semibold leading-5 text-[var(--ink-muted)]"}>
+                <div aria-hidden="true" className="flex h-9 w-full items-center justify-center">
+                  {logo && (
+                    <Image
+                      src={logo}
+                      alt=""
+                      width={120}
+                      height={32}
+                      className="h-8 w-full max-w-[120px] object-contain"
+                    />
+                  )}
+                </div>
+                <span className="text-sm font-semibold leading-5 text-[var(--ink-muted)]">
                   {name}
                 </span>
               </li>
