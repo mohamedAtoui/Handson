@@ -7,14 +7,11 @@ export default function DistributorDirectory() {
   return (
     <section
       aria-labelledby="distributor-directory-title"
-      className="border-y border-[var(--line)] bg-[var(--brand-tint)] py-8 sm:py-10"
+      className="bg-white py-8 sm:py-10"
     >
       <div className="shell">
-        <div className="mx-auto max-w-4xl">
-          <p className="eyebrow">
-            <T fr="Disponibilité" en="Availability" />
-          </p>
-          <h2 id="distributor-directory-title" className="mt-2 max-w-3xl font-sans text-xl font-medium leading-snug sm:text-2xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 id="distributor-directory-title" className="font-sans text-lg font-medium leading-relaxed sm:text-xl">
             <T
               fr="Pharmaciens, retrouvez Synapgen chez les grossistes suivants :"
               en="Pharmacists, find Synapgen at the following wholesalers:"
@@ -22,13 +19,13 @@ export default function DistributorDirectory() {
           </h2>
         </div>
 
-        <ul className="mx-auto mt-5 grid max-w-4xl grid-cols-2 overflow-hidden rounded-lg border border-[var(--line)] bg-white sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:mt-7">
           {DISTRIBUTORS.map((name) => {
             const logo = DISTRIBUTOR_LOGOS[name];
             return (
               <li
                 key={name}
-                className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 border-b border-[var(--line)] px-3 py-2 text-center"
+                className="flex min-h-14 w-[calc(50%-0.75rem)] min-w-0 flex-col items-center justify-center gap-1.5 text-center sm:w-32"
               >
                 {logo && (
                   <Image
@@ -39,7 +36,7 @@ export default function DistributorDirectory() {
                     className="h-8 w-full max-w-[120px] object-contain"
                   />
                 )}
-                <span className="text-sm font-semibold leading-5 text-[var(--ink)]">
+                <span className={logo ? "text-xs font-medium leading-4 text-[var(--ink-muted)]" : "text-base font-semibold leading-5 text-[var(--ink-muted)]"}>
                   {name}
                 </span>
               </li>
