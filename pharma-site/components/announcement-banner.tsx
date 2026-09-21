@@ -6,8 +6,8 @@ function DistributorGroup({ hidden = false }: { hidden?: boolean }) {
     <ul className="marquee-group" aria-hidden={hidden || undefined}>
       {DISTRIBUTORS.map((name) => (
         <li key={name} className="marquee-item">
-          <span aria-hidden className="marquee-dot" />
           {name}
+          <span aria-hidden className="marquee-dot" />
         </li>
       ))}
     </ul>
@@ -26,7 +26,7 @@ export default function AnnouncementBanner() {
       style={{ background: "var(--accent-strong)" }}
     >
       <div className="shell">
-        <div className="flex flex-col items-center gap-1 py-2 text-[12.5px] sm:text-sm lg:flex-row lg:gap-5 lg:py-2.5">
+        <div className="flex flex-col items-start gap-1 py-2 text-[12.5px] sm:text-sm lg:flex-row lg:items-center lg:gap-5 lg:py-2.5">
           <span className="flex shrink-0 items-center gap-2.5">
             <span className="synapgen-dance inline-flex aspect-square h-7 items-center justify-center sm:h-8">
               <Image

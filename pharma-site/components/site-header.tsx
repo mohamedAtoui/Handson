@@ -26,7 +26,7 @@ export default function SiteHeader({
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white/92 backdrop-blur">
       <div className="shell">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" aria-label="HandSon" className="shrink-0">
+          <Link href="/" aria-label="HandSon" className="-my-2 shrink-0 py-2">
             <Image
               src="/handson-logo.png"
               alt="HandSon"
@@ -46,9 +46,14 @@ export default function SiteHeader({
               ))}
             </nav>
           ) : (
-            <Link href="/" className="nav-link inline-flex items-center gap-2">
+            <Link
+              href="/"
+              className="nav-link ml-auto inline-flex items-center gap-2"
+            >
               <ArrowLeft className="h-4 w-4" />
-              <T fr="Retour à l'accueil" en="Back to Home" />
+              <span className="max-sm:sr-only">
+                <T fr="Retour à l'accueil" en="Back to Home" />
+              </span>
             </Link>
           )}
 
@@ -61,7 +66,7 @@ export default function SiteHeader({
                 aria-expanded={open}
                 aria-controls="menu-mobile"
                 aria-label="Menu"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--line-strong)] text-[var(--ink-muted)] sm:hidden"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--line-strong)] text-[var(--ink-muted)] sm:hidden"
               >
                 {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </button>

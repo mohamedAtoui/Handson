@@ -48,7 +48,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="card bg-white p-6 sm:p-8">
+    <div className="card card-bleed bg-white p-5 sm:p-7 lg:p-8">
       <h3 className="font-sans text-[1.0625rem] font-semibold">
         Send us a message
       </h3>
