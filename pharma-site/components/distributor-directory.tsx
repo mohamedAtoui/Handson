@@ -5,15 +5,16 @@ import { T } from "@/components/i18n";
 export default function DistributorDirectory() {
   return (
     <section
+      id="grossistes"
       aria-labelledby="distributor-directory-title"
-      className="bg-white py-8 sm:py-10"
+      className="scroll-mt-32 bg-white py-8 sm:py-10"
     >
       <div className="shell">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="distributor-directory-title" className="font-sans text-lg font-medium leading-relaxed sm:text-xl">
             <T
-              fr="Pharmaciens, retrouvez Synapgen chez les grossistes suivants :"
-              en="Pharmacists, find Synapgen at the following wholesalers:"
+              fr="Pharmaciens, retrouvez Synapgen et Synapgen Relax chez les grossistes suivants :"
+              en="Pharmacists, find Synapgen and Synapgen Relax at the following wholesalers:"
             />
           </h2>
         </div>

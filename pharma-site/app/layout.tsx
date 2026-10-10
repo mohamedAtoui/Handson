@@ -35,12 +35,13 @@ export const metadata: Metadata = {
     template: "%s | HandSon",
   },
   description:
-    "HandSon - Innovative pharmaceutical solutions including dietary supplements for memory, cognitive function and mental vitality.",
+    "HandSon — Synapgen pour la mémoire et les fonctions cognitives, et Synapgen Relax pour accompagner les périodes de stress passager et les perturbations du sommeil.",
   keywords: [
     "HandSon",
     "pharmaceutical",
     "supplements",
     "Synapgen",
+    "Synapgen Relax",
     "Magnesium",
     "memory",
     "cognitive function",

@@ -6,6 +6,8 @@ import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import AnnouncementBanner from "@/components/announcement-banner"
 import DistributorDirectory from "@/components/distributor-directory"
+import RelaxDescription from "@/components/relax-description"
+import ProductCarousel from "@/components/product-carousel"
 import { T } from "@/components/i18n"
 
 const FEATURES = [
@@ -22,9 +24,9 @@ export default function Home() {
 
       <main>
         {/* ───────────────────────── Hero ───────────────────────── */}
-        <section className="section">
+        <section className="section home-hero">
           <div className="shell">
-            <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-6">
                 <h1 className="display-lg rise-in max-w-xl">
                   <T
@@ -33,7 +35,7 @@ export default function Home() {
                   />
                 </h1>
 
-                <div className="rise-in delay-2 mt-9 flex flex-wrap items-center gap-3">
+                <div className="hero-actions rise-in delay-2 mt-6 flex flex-wrap items-center gap-3 sm:mt-9">
                   <Link href="#products" className="btn btn-primary">
                     <T fr="Voir les produits" en="View Products" />
                     <ArrowRight className="h-4 w-4" />
@@ -45,16 +47,7 @@ export default function Home() {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="product-stage panel-tint min-h-[22rem] px-6 py-12 sm:px-10 sm:py-16 lg:min-h-[26rem]">
-                  <Image
-                    src="/synapgen-landing.png"
-                    alt="Synapgen - Memory and Mental Vitality Supplement"
-                    width={1528}
-                    height={698}
-                    priority
-                    className="h-auto w-full object-contain drop-shadow-[0_22px_44px_rgba(12,27,20,0.18)]"
-                  />
-                </div>
+                <ProductCarousel />
               </div>
             </div>
           </div>
@@ -85,17 +78,17 @@ export default function Home() {
 
             <article className="card card-lift mt-10 overflow-hidden bg-white">
               <div className="grid lg:grid-cols-2">
-                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-6 py-10 lg:border-r lg:border-b-0 lg:px-10 lg:py-14">
+                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-6 py-6 lg:border-r lg:border-b-0 lg:px-10 lg:py-8">
                   <Image
                     src="/synapgen-3d.png"
                     alt="Synapgen - Memory and Mental Vitality Supplement"
                     width={1080}
                     height={1080}
-                    className="h-auto w-full max-w-sm object-contain drop-shadow-[0_18px_34px_rgba(12,27,20,0.16)]"
+                    className="h-56 w-full max-w-sm object-contain drop-shadow-[0_18px_34px_rgba(12,27,20,0.16)] sm:h-64"
                   />
                 </div>
 
-                <div className="flex flex-col justify-center p-7 sm:p-10">
+                <div className="flex flex-col justify-center p-6 sm:p-10">
                   <span className="chip chip-brand self-start">
                     <T fr="Complément Alimentaire" en="Dietary Supplement" />
                   </span>
@@ -126,6 +119,19 @@ export default function Home() {
                     <T fr="En savoir plus" en="Learn More" />
                     <ArrowRight className="h-4 w-4" />
                   </Link>
+                </div>
+              </div>
+            </article>
+            <article className="card card-lift mt-6 overflow-hidden bg-white">
+              <div className="grid lg:grid-cols-2">
+                <div className="panel-tint flex items-center justify-center border-b border-[var(--line)] px-6 py-6 lg:border-r lg:border-b-0 lg:px-10 lg:py-8">
+                  <Image src="/synapgen-relax.png" alt="Synapgen Relax — boîte de 20 gélules" width={1303} height={1207} className="h-40 w-full max-w-xs object-contain drop-shadow-[0_18px_34px_rgba(12,27,20,0.16)] sm:h-44" />
+                </div>
+                <div className="flex flex-col justify-center p-6 sm:p-10">
+                  <span className="chip chip-brand self-start"><T fr="Complément alimentaire · 20 gélules" en="Dietary supplement · 20 capsules" /></span>
+                  <h3 className="display-md mt-5">Synapgen Relax</h3>
+                  <div className="mt-4"><RelaxDescription /></div>
+                  <Link href="/products/synapgen-relax" className="link-arrow mt-8 self-start"><T fr="En savoir plus" en="Learn More" /><ArrowRight className="h-4 w-4" /></Link>
                 </div>
               </div>
             </article>

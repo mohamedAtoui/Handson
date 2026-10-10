@@ -39,7 +39,7 @@ export default function AnnouncementBanner() {
               />
             </span>
 
-            <span className="font-semibold whitespace-nowrap">
+            <span className="font-semibold text-center lg:text-left">
               <span data-lang-only="fr" lang="fr">
                 <span className="hidden sm:inline">Synapgen — </span>
                 Disponible en Algérie chez&nbsp;:

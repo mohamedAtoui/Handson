@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { Check, Clock, Mail, Phone, Pill } from "lucide-react"
 import ProductBox3D from "@/components/product-box-3d"
 import SiteHeader from "@/components/site-header"
@@ -332,6 +333,11 @@ export default function SynapgenPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+          <section className="border-t border-[var(--line)] py-8">
+            <div className="shell">
+              <Link href="/products/synapgen-relax" className="link-arrow"><T fr="Découvrez également Synapgen Relax →" en="Also discover Synapgen Relax →" /></Link>
             </div>
           </section>
         </main>

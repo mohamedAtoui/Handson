@@ -159,6 +159,13 @@
   background: var(--surface-alt);
 }
 
+/* Keep the opening content and product controls comfortably within phone screens. */
+@media (max-width: 639px) {
+  .section { padding-block: 3rem; }
+  .home-hero { padding-block: 2rem; }
+  .hero-actions .btn { flex: 1 1 auto; padding-inline: 1rem; }
+}
+
 .rule {
   border: 0;
   border-top: 1px solid var(--line);
